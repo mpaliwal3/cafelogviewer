@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.logLineInput{
+  padding: 5px;
+  height: 100px;
+  width: 1024px;
+}
+
+.td {
+  word-wrap: break-word;
+}

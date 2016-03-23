@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .jumbotron
+    h1 #{title}
+    div#mailHeader(class="text-right") Mudit Manu Paliwal
+      a(href='mailto:mupaliwa@microsoft.com')  (mupaliwa@microsoft.com)
+  div#panel-main(class="panel panel-default")
+    div#panel-body(class="panel-body")
+      div#InputRow(class="row")
+        label Input Cafe log line, one line at a time
+      div#InputRow(class="row")
+        textarea(id="logLineInput", rows=3, columns=30, class="logLineInput")
+      div#buttonRow(class="row")
+        button(onclick='onButtonClick()', class="btn btn-default") Parse Cafe Log
+  
+  div#tableContainer(class="table-responsive")
+    table#resulttable(class="table table-bordered table-striped")
+
+  script(type='text/javascript', src='/javascripts/cafeLogViewer.js').
+
