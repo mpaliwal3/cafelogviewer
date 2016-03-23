@@ -10,11 +10,16 @@ block content
       div#InputRow(class="row")
         label Input Cafe log line, one line at a time
       div#InputRow(class="row")
-        textarea(id="logLineInput", rows=3, columns=30, class="logLineInput")
+        textarea(id="logLineInput", rows=3, columns=30, class="logLineInput") 2016-03-02T01:00:08.793Z,84d75cf4-1f26-4afa-9ef7-b23ef455020a,15,1,427,16,,Ews,pod51091.outlook.com,/ews/<PII:H101(Jp1vUJ/pGPfeVmejFF4zUjl5FTeSIUz6FpGAxZrSwD4=)>,,LiveIdBasic,True,<PII:H101(0155te0jzUDY7tQfEXkzJkOl5ufGBfpJWn8Upl2twvI=)>@namp102e15.o365.exchangemon.net,namp102e15.o365.exchangemon.net,LiveIdMemberName:<PII:H101(0155te0jzUDY7tQfEXkzJkOl5ufGBfpJWn8Upl2twvI=)>@namp102e15.o365.exchangemon.net;|,OBD_AMProbe/OutsideIn/ae0f15d0-1d13-4637-a1b9-bbd981314a57 (ExchangeServicesClient/15.01.0435.000),<PII:H101(mZXMBbg44bmhnWRWn3utwp55lPSAL26G8ILI+iXcwRM=):S101(UP1kb3Z5jfqm1TK3UwzeDvRK0Ty8Jrs+Ot5xuJOg7g4=)>,BY1P102CA0002,200,200,,POST,Backend,DM2P102MB0013.NAMP102.PROD.OUTLOOK.COM,15.01.0403.000,,LogonUser|,,,0,791,475,,,,0,,0,,0,,0,,0;1;0;,1,,0,0,80,0,162,,0,1,,,,,245,,,87,250,,,,BeginRequest=2016-03-02T01:00:08.543Z;SharedCache=Op <PII:H101(EMWCFAGSz1lkR1LbKXmGFES0+6B0uMIfS0gwQi3vJ2M=)>@namp102e15.o365.exchangemon.net|;SelectedRoutingKey=<PII:H101(0155te0jzUDY7tQfEXkzJkOl5ufGBfpJWn8Upl2twvI=)>@namp102e15.o365.exchangemon.net;RoutingEntry=LiveIdMemberName:<PII:H101(0155te0jzUDY7tQfEXkzJkOl5ufGBfpJWn8Upl2twvI=)>%40namp102e15.o365.exchangemon.net%3B DatabaseGuid:<PII:H101(OgvrVnGaKOS6M4gPer6qwdkrGbazMHnYpLy1nKQapHU=)>%40namp102e15.o365.exchangemon.net%40NAMP102.PROD.OUTLOOK.COM%400@131013540085434297;RoutingEntry=CafeArrayDbGuid:<PII:H101(OgvrVnGaKOS6M4gPer6qwdkrGbazMHnYpLy1nKQapHU=)>%40namp102e15.o365.exchangemon.net%40NAMP102.PROD.OUTLOOK.COM CafeArray:-1%2C-1%2C-1%2C-1+True@131013540085434297;RoutingEntry=DatabaseGuid:<PII:H101(OgvrVnGaKOS6M4gPer6qwdkrGbazMHnYpLy1nKQapHU=)>%40namp102e15.o365.exchangemon.net%40NAMP102.PROD.OUTLOOK.COM Server:DM2P102MB0013.NAMP102.PROD.OUTLOOK.COM+1942061459@635920790824095460;MailboxServerByServerGuard_DM2P102MB0013.NAMP102.PROD.OUTLOOK.COM=1;MailboxServerByForestGuard_NAMP102.PROD.OUTLOOK.COM=1;TotalMailboxServerGuard=1;SharedCacheGuard=0;ProxyStats_Event_Timestamps=1/1/1/2/1/1/2/82/83/83/83/83/83/83/83/83/83/83/245/246/247/246/247/246/247/246/247/246/247/246/247/-1/247/247/;ProxyStats_Streaming_Latencies=0/1/0/80/0/0/0/;ProxyStats_Event_Counters=1/4/1/5/4/;ProxyStats_Stream_Stats=791/0/475/1/;ProxyStats_BufferSizeFootprints_Request=791/;ProxyStats_BufferSizeFootprints_Response=8192/;NewConnection=141.251.181.209;;,,
       div#buttonRow(class="row")
         button(onclick='onButtonClick()', class="btn btn-default") Parse Cafe Log
   
+  div#buttonGroup(class="btn-group btn-group-justified")
+    a(href="#", onclick='onButtonClick()', class="btn btn-primary") All Columns
+    a(href="#", onclick='onRoutingButtonClick()', class="btn btn-primary") Routing Summary Data
+    a(href="#", onclick='onLatencyButtonClick()', class="btn btn-primary") Latency Data
   div#tableContainer(class="table-responsive")
+    table#computedTable(class="table table-bordered table-striped")
     table#resulttable(class="table table-bordered table-striped")
 
   script(type='text/javascript', src='/javascripts/cafeLogViewer.js').
