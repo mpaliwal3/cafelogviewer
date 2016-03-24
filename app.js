@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var cafelog = require('./routes/cafelog');
+var submitLog = require('./routes/submitLog');
 
 var app = express();
 
@@ -24,8 +23,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/cafelog', cafelog);
+app.use('/request/:requestId', routes);
+app.use('/submitLog', routes);
+
+app.locals.requestFilesFolder = getCurrentDirectoryName() + '\\data\\';
+console.log("applocalset:" + app.locals.requestFilesFolder);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,5 +60,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
+function getCurrentDirectoryName() { var fullPath = __dirname; var path = fullPath.split('/'); var cwd = path[path.length-1]; return cwd; }
 
 module.exports = app;
