@@ -3,9 +3,14 @@ var columnSchema = "DateTime,RequestId,MajorVersion,MinorVersion,BuildVersion,Re
 var routingFilter = ["DateTime", "RequestId", "AnchorMailbox", "Protocol", "HttpStatus", "BackendStatus", "ErrorCode", "RoutingType", "RoutingHint", "BackendCookie", "TargetServer", "HttpProxyOverhead", "TotalRequestTime", "GenericInfo", "GenericErrors"];
 var routingComputedEvents = ["CafeV2", "IsEdgeRequest", "CafeError", "RoutingKeysEvaluated", "SelectedRoutingKey", "RoutingEntries", "UserDBCacheHit", "DBBECacheHit", "RoutingError", "RUMUpdate", "CafeRequestRetry" ];
 
+var latencyFilter = [""]
+var proxyEventsTimestamps = ["IIS_MapHandler","IIS_ExecuteHandler","WinHttp_Pre_SendRequest","WinHttp_Post_SendRequest","WinHttp_NameResolving","WinHttp_NameResolved","WinHttp_Connecting","WinHttp_Connected","IIS_BeginRead_First","IIS_BeginRead_Last","IIS_ReadComplete_First","IIS_ReadComplete_Last","WinHttp_SendRequestComplete","WinHttp_BeginWrite_First","WinHttp_BeginWrite_Last","WinHttp_WriteComplete_First","WinHttp_WriteComplete_Last","WinHttp_ReceiveResponse","WinHttp_HeadersAvailable","WinHttp_QueryData_First","WinHttp_QueryData_Last","WinHttp_DataAvailable_First","WinHttp_DataAvailable_Last","WinHttp_BeginRead_First","WinHttp_BeginRead_Last","WinHttp_ReadComplete_First","WinHttp_ReadComplete_Last","IIS_BeginWrite_First","IIS_BeginWrite_Last","IIS_WriteComplete_First","IIS_WriteComplete_Last","WinHttp_RequestError","Proxy_CompleteRequest","IIS_CompleteRequest"];
+
+//console.log("loading cafelogviewer.js")
+
 // Callbacks
 function onButtonClick() {
-  //alert("buttonclicked")
+  //alert("buttonclicked");
   parseCafeLog(columnSchema, null);
 }
 
@@ -20,12 +25,36 @@ function onRoutingButtonClick() {
 
 function onLatencyButtonClick() {
   //alert("This section is not ready");
+  var log = getInputText();
+  var schematizedLog = getSchematizedFullLog(log, columnSchema);
   var resulttable = $("#resulttable");
   var computedTable = $("#computedTable");
   resulttable.empty();
   computedTable.empty();
-  var dict = {"LogColumn": "Section under contruction" };
-  printDictionaryAsTable(dict, resulttable, ["LogColumn"]);
+  var genericInfo = schematizedLog["GenericInfo"];
+  var eventTimestamps = genericInfo["ProxyStats_Event_Timestamps"];
+  timestamps = [];
+  if(eventTimestamps == null)
+  {
+    timestamps = {"NotCafeV2Request": "No data from Proxy Module"};
+    printDictionaryAsTable(timestamps, resulttable, "NotCafeV2Request");
+  }
+  else
+  {
+    timestamps = parseProxyEventTimestamps(eventTimestamps[0]);
+    printDictionaryAsTable(timestamps, resulttable, proxyEventsTimestamps, false);
+  }
+}
+
+function parseProxyEventTimestamps(eventTimestamps)
+{
+  returnValue = [];
+  var data = eventTimestamps.split('/');
+  for(var i = 0; i < proxyEventsTimestamps.length; i++) {
+    returnValue[proxyEventsTimestamps[i]] = data[i];
+  }
+
+  return returnValue;
 }
 
 // private functions
@@ -93,7 +122,7 @@ function computeEvents(schematizedLog, eventsToCompute) {
 var isCafeV2 = function(schematizedLog) {
   var returnValue = false;
   var genericInfo = schematizedLog["GenericInfo"];
-  if (genericInfo.indexOf("ProxyStats_Event_Timestamps") != -1 || genericInfo.indexOf("ProxyStats_Event_Timestamps"))
+  if (genericInfo["ProxyStats_Event_Timestamps"] != null)
   {
     returnValue = true;
   }
@@ -130,4 +159,3 @@ var parseRUMUpdate = function(schematizedLog) {
 var isCafeRetry = function(schematizedLog) {
   return schematizedLog["GenericInfo"];
 }
-

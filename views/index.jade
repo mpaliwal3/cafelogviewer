@@ -16,6 +16,7 @@ block content
         div#buttonRow(class="row")
           //button(onclick='onButtonClick()', class="btn btn-success") Parse Cafe Log
           button#btnSubmit(type="submit", class="btn btn-success") Generate Sharing Link
+          a(target="_blank", href="https://msft.spoppe.com/teams/exchange/SEC/_layouts/OneNote.aspx?id=%2Fteams%2Fexchange%2FSEC%2FShared%20Documents%2FExternal%20Programmability%2FEP%20On-Call%20Notes&wd=target%28Understanding%20CAFE%20Protocol%20Logs.one%7CE7CD14AB-73A1-4AC4-BE10-3ACC144177DB%2FProtocol%20Log%20Schema%7C889B0D59-5E4B-4B90-9EF2-107A27DA5D0C%2F%29", class="btn btn-link") Understand Cafe Log Columns
   
   div#buttonGroup(class="btn-group btn-group-justified")
     a(href="#", onclick='onButtonClick()', class="btn btn-primary") All Data
@@ -27,5 +28,5 @@ block content
     table#resulttable(class="table table-bordered table-striped")
 
   script(type='text/javascript', src='/javascripts/cafeLogViewer.js').
-  script(type="text/javascript", src='/javascripts/common.js').
+  script(type='text/javascript', src='/javascripts/common.js').
 

@@ -30,17 +30,18 @@ function tokenizeData(data, seperator, tokenSplitter) {
   return returnValue;
 }
 
-function printDictionaryAsTable(dictionary, table, filter) {
+function printDictionaryAsTable(dictionary, table, filter, printCount = true) {
+  var counter = 1;
   for(var key in dictionary) {
     if(filter.indexOf(key) != -1)
     {
-      var tr = formatTableRow(key, dictionary[key])
+      var tr = formatTableRow(key, dictionary[key], printCount, counter++);
       table.append(tr);
     }  
   }
 }
 
-function formatTableRow(key, value) {
+function formatTableRow(key, value, printCount, rowNumber) {
   var dataValue = [];
   if(value != null)
   {
@@ -61,7 +62,12 @@ function formatTableRow(key, value) {
     value = "";
   }
 
-  var tr = "<tr><td>" + key + "</td><td class=\"td\">" + htmlEntities(dataValue) + "</td></tr>"
+  var rowData = "<td>" + key + "</td><td class=\"td\">" + htmlEntities(dataValue) + "</td>";
+  if(printCount)
+  {
+    rowData = "<td>" + rowNumber + "</td>" + rowData;
+  }
+  var tr = "<tr>" + rowData + "</tr>";
   return tr;
 }  
 

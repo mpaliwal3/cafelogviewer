@@ -2,8 +2,13 @@
 to start node server
 npm start
 
+ClientSide Javascript
 cafelogviewer.js - all the client side javascript logic to display logs
-index.jade html page template
+common.js - library functions
+
+Server Side
+index.jade - html page template
+index.js - server side javascipt
 
 # run in a docker
 1. git pull https://github.com/mpaliwal3/cafelogviewer.git
